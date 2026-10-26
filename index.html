@@ -2,17 +2,22 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <!-- Chế độ toàn màn hình (ẩn thanh link Safari) khi Thêm vào Màn hình chính trên iPhone -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Đồng Hồ" />
   <title>Đồng Hồ Thời Gian Thực — Giờ Phút Giây & Ngày Tháng Năm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #070913;
       --bg-secondary: #0f172a;
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --card-bg: rgba(15, 23, 42, 0.72);
+      --card-border: rgba(255, 255, 255, 0.14);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent-hour: #38bdf8;
@@ -22,16 +27,16 @@
       --orb-2: rgba(168, 85, 247, 0.20);
       --orb-3: rgba(244, 63, 94, 0.15);
       --shadow-color: rgba(0, 0, 0, 0.55);
-      --dial-bg: rgba(9, 13, 26, 0.85);
-      --tick-color: rgba(255, 255, 255, 0.26);
+      --dial-bg: rgba(9, 13, 26, 0.9);
+      --tick-color: rgba(255, 255, 255, 0.28);
       --tick-major: #f8fafc;
     }
 
     [data-theme="gold"] {
       --bg-primary: #0a0908;
       --bg-secondary: #171412;
-      --card-bg: rgba(24, 21, 18, 0.72);
-      --card-border: rgba(212, 175, 55, 0.24);
+      --card-bg: rgba(24, 21, 18, 0.78);
+      --card-border: rgba(212, 175, 55, 0.25);
       --text-main: #fef9ee;
       --text-muted: #bda882;
       --accent-hour: #f59e0b;
@@ -40,16 +45,16 @@
       --orb-1: rgba(245, 158, 11, 0.20);
       --orb-2: rgba(217, 119, 6, 0.16);
       --orb-3: rgba(239, 68, 68, 0.12);
-      --dial-bg: rgba(15, 13, 10, 0.9);
-      --tick-color: rgba(251, 191, 36, 0.28);
+      --dial-bg: rgba(15, 13, 10, 0.92);
+      --tick-color: rgba(251, 191, 36, 0.3);
       --tick-major: #fde68a;
     }
 
     [data-theme="emerald"] {
       --bg-primary: #04100d;
       --bg-secondary: #06211a;
-      --card-bg: rgba(6, 33, 26, 0.65);
-      --card-border: rgba(52, 211, 153, 0.2);
+      --card-bg: rgba(6, 33, 26, 0.72);
+      --card-border: rgba(52, 211, 153, 0.22);
       --text-main: #ecfdf5;
       --text-muted: #6ee7b7;
       --accent-hour: #10b981;
@@ -58,16 +63,16 @@
       --orb-1: rgba(16, 185, 129, 0.22);
       --orb-2: rgba(6, 182, 212, 0.18);
       --orb-3: rgba(250, 204, 21, 0.12);
-      --dial-bg: rgba(4, 20, 16, 0.88);
-      --tick-color: rgba(110, 231, 183, 0.26);
+      --dial-bg: rgba(4, 20, 16, 0.9);
+      --tick-color: rgba(110, 231, 183, 0.28);
       --tick-major: #d1fae5;
     }
 
     [data-theme="light"] {
       --bg-primary: #f1f5f9;
       --bg-secondary: #e2e8f0;
-      --card-bg: rgba(255, 255, 255, 0.82);
-      --card-border: rgba(15, 23, 42, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(15, 23, 42, 0.12);
       --text-main: #0f172a;
       --text-muted: #64748b;
       --accent-hour: #2563eb;
@@ -77,8 +82,8 @@
       --orb-2: rgba(124, 58, 237, 0.12);
       --orb-3: rgba(225, 29, 72, 0.10);
       --shadow-color: rgba(15, 23, 42, 0.12);
-      --dial-bg: rgba(255, 255, 255, 0.94);
-      --tick-color: rgba(15, 23, 42, 0.24);
+      --dial-bg: rgba(255, 255, 255, 0.95);
+      --tick-color: rgba(15, 23, 42, 0.25);
       --tick-major: #0f172a;
     }
 
@@ -86,147 +91,166 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
+    html {
       width: 100%;
-      max-width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow-x: hidden;
+      height: 100%;
+      background-color: var(--bg-primary);
     }
 
     body {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      width: 100%;
+      min-height: 100vh;
+      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-primary);
       background-image:
         radial-gradient(circle at 12% 18%, var(--orb-1) 0%, transparent 45%),
         radial-gradient(circle at 88% 82%, var(--orb-2) 0%, transparent 45%),
         radial-gradient(circle at 50% 45%, var(--orb-3) 0%, transparent 50%),
         radial-gradient(circle at 50% 0%, var(--bg-secondary), var(--bg-primary) 75%);
-      background-attachment: fixed;
       color: var(--text-main);
-      display: grid;
-      place-items: center;
-      padding: max(14px, env(safe-area-inset-top))
-               max(14px, env(safe-area-inset-right))
-               max(14px, env(safe-area-inset-bottom))
-               max(14px, env(safe-area-inset-left));
-      transition: background-color 0.4s ease, color 0.4s ease;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-x: hidden;
     }
 
-    /* Main Glass Card */
+    /* Main Glass Card (tương thích 100% iOS 12 / iPhone 6) */
     .clock-dashboard {
+      position: relative;
       width: 100%;
-      max-width: 980px;
-      margin: 0 auto;
+      max-width: 920px;
+      margin: auto;
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
-      border-radius: 30px;
-      padding: 32px 36px;
-      box-shadow: 0 25px 60px -15px var(--shadow-color),
-                  inset 0 1px 1px rgba(255, 255, 255, 0.14);
-      display: flex;
-      flex-direction: column;
-      gap: 26px;
+      border-radius: 28px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 50px -12px var(--shadow-color);
     }
 
     /* Top Bar */
     .top-bar {
+      display: -webkit-box;
+      display: -webkit-flex;
       display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
       align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
       justify-content: space-between;
+      -webkit-flex-wrap: wrap;
       flex-wrap: wrap;
-      gap: 12px;
-      padding-bottom: 14px;
+      padding-bottom: 12px;
+      margin-bottom: 22px;
       border-bottom: 1px solid var(--card-border);
     }
 
     .greeting-box {
+      display: -webkit-box;
+      display: -webkit-flex;
       display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
       align-items: center;
-      gap: 10px;
       min-width: 0;
     }
 
     .status-dot {
+      -webkit-flex-shrink: 0;
       flex-shrink: 0;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: var(--accent-sec);
-      box-shadow: 0 0 12px var(--accent-sec);
-      animation: pulseDot 2s infinite;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.45; }
+      box-shadow: 0 0 10px var(--accent-sec);
+      margin-right: 9px;
     }
 
     .greeting-text {
-      font-size: 0.95rem;
+      font-size: 14px;
       font-weight: 500;
       color: var(--text-muted);
-      letter-spacing: 0.02em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .controls {
+      display: -webkit-box;
+      display: -webkit-flex;
       display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
       align-items: center;
-      gap: 8px;
+      -webkit-flex-wrap: wrap;
       flex-wrap: wrap;
     }
 
-    .btn-control {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s ease;
-      white-space: nowrap;
+    .controls > * {
+      margin-left: 6px;
     }
 
-    .btn-control:hover {
-      background: rgba(255, 255, 255, 0.12);
+    .controls > *:first-child {
+      margin-left: 0;
+    }
+
+    .btn-control {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      white-space: nowrap;
     }
 
     .btn-control.active {
       background: var(--accent-hour);
       color: #070913;
       border-color: transparent;
-      font-weight: 600;
     }
 
     .theme-swatches {
-      display: flex;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
       align-items: center;
-      gap: 6px;
       background: rgba(255, 255, 255, 0.04);
-      padding: 4px 8px;
+      padding: 4px 6px;
       border-radius: 999px;
       border: 1px solid var(--card-border);
     }
 
     .swatch {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       cursor: pointer;
       border: 2px solid transparent;
+      margin: 0 2px;
     }
 
     .swatch.active {
@@ -238,20 +262,26 @@
     .swatch-emerald { background: linear-gradient(135deg, #10b981, #06b6d4); }
     .swatch-light   { background: linear-gradient(135deg, #f8fafc, #94a3b8); }
 
-    /* Center Content Grid */
+    /* Center Content Layout (Flexbox thay vì clamp() để chạy mượt trên iOS 12) */
     .main-grid {
-      display: grid;
-      grid-template-columns: 300px minmax(0, 1fr);
-      gap: 32px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
       align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
     }
 
-    /* Left: Pure SVG Analog Watch (NO CSS or SVG transforms used anywhere) */
+    /* Left: Pure SVG Analog Watch với kích thước px tường minh */
     .analog-wrapper {
-      width: 100%;
-      max-width: 300px;
-      aspect-ratio: 1 / 1;
-      margin: 0 auto;
+      -webkit-flex-shrink: 0;
+      flex-shrink: 0;
+      width: 260px;
+      height: 260px;
+      margin-right: 28px;
     }
 
     .analog-face {
@@ -260,8 +290,8 @@
       border-radius: 50%;
       background: var(--dial-bg);
       box-shadow:
-        inset 0 0 30px rgba(0, 0, 0, 0.55),
-        0 14px 34px -10px var(--shadow-color),
+        inset 0 0 25px rgba(0, 0, 0, 0.55),
+        0 12px 28px -8px var(--shadow-color),
         0 0 0 1px var(--card-border);
       overflow: hidden;
     }
@@ -345,37 +375,32 @@
 
     /* Right: Digital & Date Section */
     .digital-section {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
       min-width: 0;
     }
 
     .date-banner {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 0;
+      margin-bottom: 14px;
     }
 
     .weekday-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      align-self: flex-start;
-      padding: 5px 14px;
+      display: inline-block;
+      padding: 4px 12px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(56, 189, 248, 0.16), rgba(168, 85, 247, 0.16));
+      background: rgba(56, 189, 248, 0.14);
       border: 1px solid var(--card-border);
-      font-size: 0.85rem;
+      font-size: 12px;
       font-weight: 600;
       color: var(--accent-hour);
       letter-spacing: 0.05em;
       text-transform: uppercase;
+      margin-bottom: 6px;
     }
 
     .full-date-display {
-      font-size: clamp(1.3rem, 2.6vw, 2.15rem);
+      font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
@@ -384,34 +409,42 @@
 
     /* Digital Time Cards (Giờ - Phút - Giây) */
     .time-cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      margin-bottom: 12px;
     }
 
     .time-unit-card {
       position: relative;
-      background: rgba(255, 255, 255, 0.035);
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      margin-right: 12px;
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 18px 10px 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      border-radius: 18px;
+      padding: 14px 8px 12px;
+      text-align: center;
       overflow: hidden;
       min-width: 0;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .time-unit-card:last-child {
+      margin-right: 0;
     }
 
     .time-unit-card::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 20%;
-      right: 20%;
+      left: 22%;
+      right: 22%;
       height: 3px;
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 6px 6px;
     }
 
     .card-hour::before { background: var(--accent-hour); }
@@ -420,93 +453,103 @@
 
     .time-digits {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(1.9rem, 4.2vw, 3.6rem);
+      font-size: 46px;
       font-weight: 700;
       line-height: 1.05;
-      letter-spacing: -0.03em;
-      font-variant-numeric: tabular-nums;
       color: var(--text-main);
     }
 
     .unit-label {
-      margin-top: 6px;
-      font-size: 0.74rem;
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       color: var(--text-muted);
     }
 
     .ampm-tag {
       position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.65rem;
+      top: 6px;
+      right: 8px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 6px;
+      padding: 1px 5px;
+      border-radius: 5px;
       background: rgba(56, 189, 248, 0.15);
       color: var(--accent-hour);
     }
 
     /* Date Breakdown Boxes (Ngày - Tháng - Năm - Tuần) */
     .date-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
     }
 
     .date-pill {
-      background: rgba(255, 255, 255, 0.028);
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      margin-right: 8px;
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 10px 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      border-radius: 14px;
+      padding: 8px 6px;
       text-align: center;
-      gap: 3px;
       min-width: 0;
     }
 
+    .date-pill:last-child {
+      margin-right: 0;
+    }
+
     .date-pill-label {
-      font-size: 0.66rem;
+      display: block;
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: var(--text-muted);
       font-weight: 600;
+      margin-bottom: 2px;
     }
 
     .date-pill-value {
+      display: block;
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.95rem, 1.9vw, 1.2rem);
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-main);
     }
 
     /* Day Progress Footer */
     .day-progress-bar {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      padding-top: 12px;
+      margin-top: 18px;
+      padding-top: 10px;
       border-top: 1px solid var(--card-border);
     }
 
     .day-progress-header {
+      display: -webkit-box;
+      display: -webkit-flex;
       display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.8rem;
+      font-size: 12px;
       color: var(--text-muted);
       font-weight: 500;
+      margin-bottom: 6px;
     }
 
     .progress-track {
       width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.07);
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -518,162 +561,289 @@
       background: linear-gradient(90deg, var(--accent-hour), var(--accent-min), var(--accent-sec));
     }
 
-    /* =====================================================
-       PORTRAIT TABLET & MOBILE (Màn hình dọc)
-       ===================================================== */
-    @media (max-width: 820px) and (orientation: portrait) {
-      .clock-dashboard {
-        padding: 22px 16px;
-        gap: 20px;
-        border-radius: 24px;
-      }
-      .top-bar {
-        justify-content: center;
-        text-align: center;
-      }
-      .greeting-box {
-        width: 100%;
-        justify-content: center;
-      }
-      .controls {
-        width: 100%;
-        justify-content: center;
-      }
-      .main-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
-      }
-      .analog-wrapper {
-        max-width: 240px;
-      }
-      .date-banner {
-        align-items: center;
-        text-align: center;
-      }
-      .weekday-badge {
-        align-self: center;
-      }
+    /* Nút nổi thu nhỏ khi đang ở chế độ Phóng To (Immersive Mode) */
+    .exit-zoom-btn {
+      display: none;
+      position: fixed;
+      top: 10px;
+      right: 12px;
+      z-index: 999;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    @media (max-width: 480px) and (orientation: portrait) {
-      .date-cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .time-cards {
-        gap: 8px;
-      }
-      .time-unit-card {
-        padding: 14px 6px 12px;
-        border-radius: 16px;
-      }
-      .analog-wrapper {
-        max-width: 210px;
-      }
+    /* Thông báo hướng dẫn ẩn thanh link trên iPhone */
+    .ios-tip-toast {
+      display: none;
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid var(--accent-hour);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      white-space: nowrap;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
 
     /* =====================================================
-       LANDSCAPE MOBILE & COMPACT SCREENS (Điện thoại xoay ngang)
-       Bắt mọi độ phân giải ngang trên điện thoại (kể cả khi zoom/desktop mode)
+       PORTRAIT MOBILE (iPhone 6 dọc: 375x667)
        ===================================================== */
-    @media (orientation: landscape) and (max-height: 700px),
-           (orientation: landscape) and (max-width: 1024px) {
+    @media (max-width: 760px) and (orientation: portrait) {
       body {
-        padding: max(8px, env(safe-area-inset-top))
-                 max(12px, env(safe-area-inset-right))
-                 max(8px, env(safe-area-inset-bottom))
-                 max(12px, env(safe-area-inset-left));
+        padding: 10px;
       }
       .clock-dashboard {
-        width: 100%;
-        max-width: 920px;
-        padding: 14px 20px;
-        gap: 12px;
+        padding: 16px 14px;
         border-radius: 22px;
       }
       .top-bar {
-        padding-bottom: 8px;
-        gap: 8px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
       }
-      .greeting-text {
-        font-size: 0.82rem;
-      }
-      .btn-control {
-        padding: 4px 10px;
-        font-size: 0.74rem;
-      }
-      .swatch {
-        width: 15px;
-        height: 15px;
+      .greeting-box {
+        margin-bottom: 8px;
       }
       .main-grid {
-        grid-template-columns: clamp(145px, 38vh, 210px) minmax(0, 1fr);
-        gap: 20px;
-        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
       }
       .analog-wrapper {
-        max-width: 100%;
+        width: 185px;
+        height: 185px;
+        margin-right: 0;
+        margin-bottom: 14px;
       }
       .digital-section {
-        gap: 10px;
+        width: 100%;
       }
       .date-banner {
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .weekday-badge {
-        padding: 3px 10px;
-        font-size: 0.72rem;
+        text-align: center;
+        margin-bottom: 10px;
       }
       .full-date-display {
-        font-size: clamp(1.05rem, 2.2vw, 1.4rem);
-      }
-      .time-cards {
-        gap: 10px;
-      }
-      .time-unit-card {
-        padding: 10px 8px 8px;
-        border-radius: 16px;
+        font-size: 20px;
       }
       .time-digits {
-        font-size: clamp(1.55rem, 3.6vw, 2.35rem);
+        font-size: 32px;
       }
-      .unit-label {
-        margin-top: 2px;
-        font-size: 0.64rem;
-      }
-      .date-cards-grid {
-        gap: 8px;
+      .time-unit-card {
+        padding: 10px 4px 8px;
+        margin-right: 8px;
+        border-radius: 14px;
       }
       .date-pill {
-        padding: 6px 6px;
-        border-radius: 12px;
-        flex-direction: row;
-        justify-content: center;
-        gap: 6px;
-      }
-      .date-pill-label {
-        font-size: 0.62rem;
+        padding: 6px 4px;
+        margin-right: 6px;
       }
       .date-pill-value {
-        font-size: 0.88rem;
+        font-size: 13px;
       }
       .day-progress-bar {
-        padding-top: 6px;
-        gap: 4px;
+        margin-top: 12px;
+      }
+    }
+
+    /* =====================================================
+       LANDSCAPE MOBILE (iPhone 6 ngang: 667x375)
+       Thiết kế siêu gọn (cao ~240px) vừa khít màn hình iPhone 6
+       ===================================================== */
+    @media (orientation: landscape) and (max-width: 960px),
+           (orientation: landscape) and (max-height: 520px) {
+      body {
+        /* Cho phép cuộn nhẹ 1px để Safari iPhone 6 tự thu gọn thanh link web */
+        min-height: 102vh;
+        padding: 6px 10px;
+      }
+      .clock-dashboard {
+        max-width: 640px;
+        padding: 10px 14px;
+        border-radius: 18px;
+      }
+      .top-bar {
+        padding-bottom: 6px;
+        margin-bottom: 8px;
+      }
+      .greeting-text {
+        font-size: 11px;
+      }
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        margin-right: 6px;
+      }
+      .btn-control {
+        padding: 3px 8px;
+        font-size: 10px;
+      }
+      .theme-swatches {
+        padding: 2px 5px;
+      }
+      .swatch {
+        width: 13px;
+        height: 13px;
+      }
+      .analog-wrapper {
+        width: 146px;
+        height: 146px;
+        margin-right: 14px;
+      }
+      .date-banner {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .weekday-badge {
+        font-size: 10px;
+        padding: 2px 8px;
+        margin-bottom: 0;
+        margin-right: 8px;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+      }
+      .full-date-display {
+        font-size: 16px;
+        white-space: nowrap;
+      }
+      .time-cards {
+        margin-bottom: 6px;
+      }
+      .time-unit-card {
+        padding: 7px 4px 5px;
+        border-radius: 12px;
+        margin-right: 8px;
+      }
+      .time-digits {
+        font-size: 26px;
+      }
+      .unit-label {
+        font-size: 9px;
+        margin-top: 2px;
+      }
+      .date-pill {
+        padding: 4px 4px;
+        border-radius: 10px;
+        margin-right: 6px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+      }
+      .date-pill-label {
+        font-size: 9px;
+        margin-bottom: 0;
+        margin-right: 4px;
+      }
+      .date-pill-value {
+        font-size: 12px;
+      }
+      .day-progress-bar {
+        margin-top: 7px;
+        padding-top: 5px;
       }
       .day-progress-header {
-        font-size: 0.72rem;
+        font-size: 10px;
+        margin-bottom: 3px;
       }
       .progress-track {
-        height: 5px;
+        height: 4px;
+      }
+    }
+
+    /* =====================================================
+       CHẾ ĐỘ PHÓNG TO (IMMERSIVE ZOOM MODE) TRÊN IPHONE 6
+       Ẩn thanh công cụ trên/dưới, phóng to mặt đồng hồ tràn viền
+       ===================================================== */
+    body.immersive-mode {
+      padding: 0;
+      min-height: 105vh;
+    }
+
+    body.immersive-mode .clock-dashboard {
+      max-width: 100%;
+      width: 100vw;
+      min-height: 100vh;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      padding: 10px 18px;
+    }
+
+    body.immersive-mode .top-bar,
+    body.immersive-mode .day-progress-bar {
+      display: none;
+    }
+
+    body.immersive-mode .exit-zoom-btn {
+      display: inline-block;
+    }
+
+    @media (orientation: landscape) {
+      body.immersive-mode .analog-wrapper {
+        width: 190px;
+        height: 190px;
+        margin-right: 20px;
+      }
+      body.immersive-mode .full-date-display {
+        font-size: 20px;
+      }
+      body.immersive-mode .time-digits {
+        font-size: 36px;
+      }
+      body.immersive-mode .time-unit-card {
+        padding: 12px 6px 10px;
+      }
+      body.immersive-mode .date-pill {
+        padding: 6px 6px;
+      }
+      body.immersive-mode .date-pill-value {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body data-theme="aurora">
+
+  <!-- Nút thu nhỏ khi đang ở chế độ Phóng to toàn màn hình -->
+  <button class="exit-zoom-btn" id="btnExitZoom">✕ Thu nhỏ</button>
+  <div class="ios-tip-toast" id="iosTipToast">Vuốt nhẹ lên để ẩn thanh link Safari • Hoặc bấm Chia sẻ ➔ Thêm vào MH chính</div>
 
   <main class="clock-dashboard">
     <!-- Top Header & Controls -->
@@ -699,38 +869,38 @@
           <span id="sweepLabel">Kim trôi</span>
         </button>
 
-        <button class="btn-control" id="btnFullscreen" title="Toàn màn hình">
-          <span>⛶ Toàn màn hình</span>
+        <button class="btn-control" id="btnFullscreen" title="Phóng to toàn màn hình">
+          <span>⛶ Phóng to</span>
         </button>
       </div>
     </header>
 
     <!-- Main Clock Grid -->
     <section class="main-grid">
-      <!-- Pure SVG Analog Clock: ZERO CSS/SVG transforms, 100% trigonometric coordinates -->
+      <!-- Pure SVG Analog Clock -->
       <div class="analog-wrapper">
         <div class="analog-face">
           <svg class="analog-svg" viewBox="0 0 340 340">
-            <!-- Outer Ring: Seconds (R=160, starts at 12 o'clock (170,10)) -->
+            <!-- Outer Ring: Seconds -->
             <circle class="ring-bg" cx="170" cy="170" r="160"></circle>
             <path class="ring-meter ring-sec" id="ringSec" d="M 170 10 A 160 160 0 1 1 170 330 A 160 160 0 1 1 170 10"></path>
 
-            <!-- Middle Ring: Minutes (R=150, starts at 12 o'clock (170,20)) -->
+            <!-- Middle Ring: Minutes -->
             <circle class="ring-bg" cx="170" cy="170" r="150"></circle>
             <path class="ring-meter ring-min" id="ringMin" d="M 170 20 A 150 150 0 1 1 170 320 A 150 150 0 1 1 170 20"></path>
 
-            <!-- Inner Ring: Hours (R=140, starts at 12 o'clock (170,30)) -->
+            <!-- Inner Ring: Hours -->
             <circle class="ring-bg" cx="170" cy="170" r="140"></circle>
             <path class="ring-meter ring-hour" id="ringHour" d="M 170 30 A 140 140 0 1 1 170 310 A 140 140 0 1 1 170 30"></path>
 
-            <!-- 60 Ticks generated via JS using exact (x1, y1, x2, y2) -->
+            <!-- 60 Ticks -->
             <g id="svgTicksGroup"></g>
 
             <!-- Brand Label -->
             <text x="170" y="114" class="svg-brand-title">CHRONO</text>
             <text x="170" y="126" class="svg-brand-sub">VIETNAM</text>
 
-            <!-- Clock Hands positioned via exact (x1, y1, x2, y2) around (170, 170) -->
+            <!-- Clock Hands -->
             <line id="handHour" class="svg-hand svg-hand-hour" x1="170" y1="170" x2="170" y2="98"></line>
             <line id="handMin"  class="svg-hand svg-hand-min"  x1="170" y1="170" x2="170" y2="70"></line>
             <line id="handSec"  class="svg-hand svg-hand-sec"  x1="170" y1="194" x2="170" y2="54"></line>
@@ -802,21 +972,21 @@
   </main>
 
   <script>
-    const CX = 170;
-    const CY = 170;
-    const DEG_TO_RAD = Math.PI / 180;
+    var CX = 170;
+    var CY = 170;
+    var DEG_TO_RAD = Math.PI / 180;
 
-    // Generate 60 SVG dial ticks using direct trigonometry (no transform attribute)
-    const svgTicksGroup = document.getElementById('svgTicksGroup');
-    const SVG_NS = 'http://www.w3.org/2000/svg';
-    for (let i = 0; i < 60; i++) {
-      const line = document.createElementNS(SVG_NS, 'line');
-      const isMajor = i % 5 === 0;
-      const angleRad = (i * 6 - 90) * DEG_TO_RAD;
-      const cos = Math.cos(angleRad);
-      const sin = Math.sin(angleRad);
-      const rOuter = 130;
-      const rInner = isMajor ? 117 : 123;
+    // Vẽ 60 vạch chia bằng tọa độ lượng giác (tương thích mọi phiên bản iOS)
+    var svgTicksGroup = document.getElementById('svgTicksGroup');
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i < 60; i++) {
+      var line = document.createElementNS(SVG_NS, 'line');
+      var isMajor = i % 5 === 0;
+      var angleRad = (i * 6 - 90) * DEG_TO_RAD;
+      var cos = Math.cos(angleRad);
+      var sin = Math.sin(angleRad);
+      var rOuter = 130;
+      var rInner = isMajor ? 117 : 123;
 
       line.setAttribute('class', isMajor ? 'svg-tick major' : 'svg-tick');
       line.setAttribute('x1', (CX + cos * rOuter).toFixed(2));
@@ -827,55 +997,52 @@
     }
 
     function setHandLine(lineEl, angleDeg, tipRadius, tailRadius) {
-      const rad = (angleDeg - 90) * DEG_TO_RAD;
-      const cos = Math.cos(rad);
-      const sin = Math.sin(rad);
+      var rad = (angleDeg - 90) * DEG_TO_RAD;
+      var cos = Math.cos(rad);
+      var sin = Math.sin(rad);
       lineEl.setAttribute('x1', (CX - cos * tailRadius).toFixed(2));
       lineEl.setAttribute('y1', (CY - sin * tailRadius).toFixed(2));
       lineEl.setAttribute('x2', (CX + cos * tipRadius).toFixed(2));
       lineEl.setAttribute('y2', (CY + sin * tipRadius).toFixed(2));
     }
 
-    // State
-    let is24Hour = true;
-    let isSmoothSweep = true;
-    let lastSecond = -1;
+    var is24Hour = true;
+    var isSmoothSweep = true;
+    var lastSecond = -1;
 
-    // Elements
-    const handHour = document.getElementById('handHour');
-    const handMin  = document.getElementById('handMin');
-    const handSec  = document.getElementById('handSec');
+    var handHour = document.getElementById('handHour');
+    var handMin  = document.getElementById('handMin');
+    var handSec  = document.getElementById('handSec');
 
-    const ringSec  = document.getElementById('ringSec');
-    const ringMin  = document.getElementById('ringMin');
-    const ringHour = document.getElementById('ringHour');
+    var ringSec  = document.getElementById('ringSec');
+    var ringMin  = document.getElementById('ringMin');
+    var ringHour = document.getElementById('ringHour');
 
-    const digitHour = document.getElementById('digitHour');
-    const digitMin  = document.getElementById('digitMin');
-    const digitSec  = document.getElementById('digitSec');
-    const ampmTag   = document.getElementById('ampmTag');
+    var digitHour = document.getElementById('digitHour');
+    var digitMin  = document.getElementById('digitMin');
+    var digitSec  = document.getElementById('digitSec');
+    var ampmTag   = document.getElementById('ampmTag');
 
-    const weekdayBadge       = document.getElementById('weekdayBadge');
-    const fullDateDisplay    = document.getElementById('fullDateDisplay');
-    const greetingText       = document.getElementById('greetingText');
-    const pillDay            = document.getElementById('pillDay');
-    const pillMonth          = document.getElementById('pillMonth');
-    const pillYear           = document.getElementById('pillYear');
-    const pillWeek           = document.getElementById('pillWeek');
-    const dayOfYearText      = document.getElementById('dayOfYearText');
-    const dayProgressPercent = document.getElementById('dayProgressPercent');
-    const dayProgressFill    = document.getElementById('dayProgressFill');
+    var weekdayBadge       = document.getElementById('weekdayBadge');
+    var fullDateDisplay    = document.getElementById('fullDateDisplay');
+    var greetingText       = document.getElementById('greetingText');
+    var pillDay            = document.getElementById('pillDay');
+    var pillMonth          = document.getElementById('pillMonth');
+    var pillYear           = document.getElementById('pillYear');
+    var pillWeek           = document.getElementById('pillWeek');
+    var dayOfYearText      = document.getElementById('dayOfYearText');
+    var dayProgressPercent = document.getElementById('dayProgressPercent');
+    var dayProgressFill    = document.getElementById('dayProgressFill');
 
-    // Setup SVG ring circumferences
-    const CIRC_SEC  = 2 * Math.PI * 160;
-    const CIRC_MIN  = 2 * Math.PI * 150;
-    const CIRC_HOUR = 2 * Math.PI * 140;
+    var CIRC_SEC  = 2 * Math.PI * 160;
+    var CIRC_MIN  = 2 * Math.PI * 150;
+    var CIRC_HOUR = 2 * Math.PI * 140;
 
     ringSec.style.strokeDasharray  = CIRC_SEC;
     ringMin.style.strokeDasharray  = CIRC_MIN;
     ringHour.style.strokeDasharray = CIRC_HOUR;
 
-    const WEEKDAYS_VI = [
+    var WEEKDAYS_VI = [
       'Chủ Nhật',
       'Thứ Hai',
       'Thứ Ba',
@@ -886,57 +1053,54 @@
     ];
 
     function padZero(num) {
-      return String(num).padStart(2, '0');
+      return (num < 10 ? '0' : '') + num;
     }
 
     function getDayOfYear(date) {
-      const start = new Date(date.getFullYear(), 0, 0);
-      const diff = date - start + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+      var start = new Date(date.getFullYear(), 0, 0);
+      var diff = date - start + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
       return Math.floor(diff / (1000 * 60 * 60 * 24));
     }
 
     function getISOWeek(date) {
-      const temp = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-      const dayNum = temp.getUTCDay() || 7;
+      var temp = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+      var dayNum = temp.getUTCDay() || 7;
       temp.setUTCDate(temp.getUTCDate() + 4 - dayNum);
-      const yearStart = new Date(Date.UTC(temp.getUTCFullYear(), 0, 1));
+      var yearStart = new Date(Date.UTC(temp.getUTCFullYear(), 0, 1));
       return Math.ceil((((temp - yearStart) / 86400000) + 1) / 7);
     }
 
     function getGreeting(hours) {
-      if (hours >= 5 && hours < 11) return 'Chào buổi sáng năng lượng ☀️';
-      if (hours >= 11 && hours < 14) return 'Chào buổi trưa thư thái 🌤️';
-      if (hours >= 14 && hours < 18) return 'Chào buổi chiều hiệu quả 🌇';
-      if (hours >= 18 && hours < 22) return 'Chào buổi tối ấm áp 🌙';
+      if (hours >= 5 && hours < 11) return 'Chào buổi sáng ☀️';
+      if (hours >= 11 && hours < 14) return 'Chào buổi trưa 🌤️';
+      if (hours >= 14 && hours < 18) return 'Chào buổi chiều 🌇';
+      if (hours >= 18 && hours < 22) return 'Chào buổi tối 🌙';
       return 'Đêm khuya tĩnh lặng ✨';
     }
 
     function updateClock() {
-      const now = new Date();
-      const ms = now.getMilliseconds();
-      const seconds = now.getSeconds();
-      const minutes = now.getMinutes();
-      const hours = now.getHours();
+      var now = new Date();
+      var ms = now.getMilliseconds();
+      var seconds = now.getSeconds();
+      var minutes = now.getMinutes();
+      var hours = now.getHours();
 
-      const exactSeconds = isSmoothSweep ? seconds + ms / 1000 : seconds;
-      const exactMinutes = minutes + exactSeconds / 60;
-      const exactHours   = (hours % 12) + exactMinutes / 60;
+      var exactSeconds = isSmoothSweep ? seconds + ms / 1000 : seconds;
+      var exactMinutes = minutes + exactSeconds / 60;
+      var exactHours   = (hours % 12) + exactMinutes / 60;
 
-      // Position Analog SVG Hands via exact trigonometric coordinates around (170, 170)
       setHandLine(handHour, exactHours * 30, 72, 0);
       setHandLine(handMin,  exactMinutes * 6, 100, 0);
       setHandLine(handSec,  exactSeconds * 6, 116, 24);
 
-      // Update SVG Circular Progress Rings
       ringSec.style.strokeDashoffset  = CIRC_SEC * (1 - exactSeconds / 60);
       ringMin.style.strokeDashoffset  = CIRC_MIN * (1 - exactMinutes / 60);
       ringHour.style.strokeDashoffset = CIRC_HOUR * (1 - ((hours + exactMinutes / 60) / 24));
 
-      // Update Digital Display once per second change
       if (seconds !== lastSecond) {
         lastSecond = seconds;
 
-        let displayHour = hours;
+        var displayHour = hours;
         if (!is24Hour) {
           ampmTag.style.display = 'inline-block';
           ampmTag.textContent = hours >= 12 ? 'CH' : 'SA';
@@ -949,74 +1113,115 @@
         digitMin.textContent  = padZero(minutes);
         digitSec.textContent  = padZero(seconds);
 
-        // Date & Greeting
-        const day = now.getDate();
-        const month = now.getMonth() + 1;
-        const year = now.getFullYear();
-        const weekday = WEEKDAYS_VI[now.getDay()];
+        var day = now.getDate();
+        var month = now.getMonth() + 1;
+        var year = now.getFullYear();
+        var weekday = WEEKDAYS_VI[now.getDay()];
 
-        weekdayBadge.textContent = `📅 ${weekday}`;
-        fullDateDisplay.textContent = `Ngày ${padZero(day)} Tháng ${padZero(month)} Năm ${year}`;
+        weekdayBadge.textContent = '📅 ' + weekday;
+        fullDateDisplay.textContent = 'Ngày ' + padZero(day) + ' Tháng ' + padZero(month) + ' Năm ' + year;
 
         pillDay.textContent   = padZero(day);
         pillMonth.textContent = padZero(month);
         pillYear.textContent  = year;
-        pillWeek.textContent  = `T${padZero(getISOWeek(now))}`;
+        pillWeek.textContent  = 'T' + padZero(getISOWeek(now));
 
-        const tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Giờ địa phương';
-        greetingText.textContent = `${getGreeting(hours)} • ${tzName}`;
+        greetingText.textContent = getGreeting(hours);
 
-        // Day Progress
-        const totalDaySeconds = hours * 3600 + minutes * 60 + seconds;
-        const percentDay = ((totalDaySeconds / 86400) * 100).toFixed(1);
-        const dayOfYear = getDayOfYear(now);
-        const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        var totalDaySeconds = hours * 3600 + minutes * 60 + seconds;
+        var percentDay = ((totalDaySeconds / 86400) * 100).toFixed(1);
+        var dayOfYear = getDayOfYear(now);
+        var isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 
-        dayOfYearText.textContent = `Ngày thứ ${dayOfYear}/${isLeap ? 366 : 365} trong năm ${year}`;
-        dayProgressPercent.textContent = `Tiến trình ngày hôm nay: ${percentDay}%`;
-        dayProgressFill.style.width = `${percentDay}%`;
+        dayOfYearText.textContent = 'Ngày thứ ' + dayOfYear + '/' + (isLeap ? 366 : 365) + ' năm ' + year;
+        dayProgressPercent.textContent = 'Tiến trình ngày: ' + percentDay + '%';
+        dayProgressFill.style.width = percentDay + '%';
       }
 
       requestAnimationFrame(updateClock);
     }
 
-    // Controls Interactivity
-    const btnFormat = document.getElementById('btnFormat');
-    btnFormat.addEventListener('click', () => {
+    var btnFormat = document.getElementById('btnFormat');
+    btnFormat.addEventListener('click', function() {
       is24Hour = !is24Hour;
       btnFormat.querySelector('span').textContent = is24Hour ? '24H' : '12H';
-      btnFormat.classList.toggle('active', is24Hour);
+      if (is24Hour) {
+        btnFormat.classList.add('active');
+      } else {
+        btnFormat.classList.remove('active');
+      }
       lastSecond = -1;
     });
 
-    const btnSweep = document.getElementById('btnSweep');
-    const sweepLabel = document.getElementById('sweepLabel');
-    btnSweep.addEventListener('click', () => {
+    var btnSweep = document.getElementById('btnSweep');
+    var sweepLabel = document.getElementById('sweepLabel');
+    btnSweep.addEventListener('click', function() {
       isSmoothSweep = !isSmoothSweep;
       sweepLabel.textContent = isSmoothSweep ? 'Kim trôi' : 'Kim giật';
-      btnSweep.classList.toggle('active', isSmoothSweep);
-    });
-
-    const btnFullscreen = document.getElementById('btnFullscreen');
-    btnFullscreen.addEventListener('click', () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
+      if (isSmoothSweep) {
+        btnSweep.classList.add('active');
       } else {
-        document.exitFullscreen().catch(() => {});
+        btnSweep.classList.remove('active');
       }
     });
 
-    // Theme Switcher
-    const swatches = document.querySelectorAll('.swatch');
-    swatches.forEach(swatch => {
-      swatch.addEventListener('click', () => {
-        swatches.forEach(s => s.classList.remove('active'));
-        swatch.classList.add('active');
-        document.body.setAttribute('data-theme', swatch.getAttribute('data-set-theme'));
+    // Chế độ Phóng to & Ẩn thanh link trên iPhone 6
+    var btnFullscreen = document.getElementById('btnFullscreen');
+    var btnExitZoom = document.getElementById('btnExitZoom');
+    var iosTipToast = document.getElementById('iosTipToast');
+    var tipTimeout = null;
+
+    function enterImmersiveMode() {
+      document.body.classList.add('immersive-mode');
+      var docEl = document.documentElement;
+      if (docEl.requestFullscreen) {
+        docEl.requestFullscreen().catch(function() {});
+      } else if (docEl.webkitRequestFullscreen) {
+        docEl.webkitRequestFullscreen();
+      }
+      // Tự động cuộn nhẹ xuống trên Safari iPhone 6 để thu gọn thanh link
+      setTimeout(function() {
+        window.scrollTo(0, 1);
+      }, 100);
+
+      iosTipToast.style.display = 'block';
+      if (tipTimeout) clearTimeout(tipTimeout);
+      tipTimeout = setTimeout(function() {
+        iosTipToast.style.display = 'none';
+      }, 4500);
+    }
+
+    function exitImmersiveMode() {
+      document.body.classList.remove('immersive-mode');
+      iosTipToast.style.display = 'none';
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(function() {});
+      } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+
+    btnFullscreen.addEventListener('click', enterImmersiveMode);
+    btnExitZoom.addEventListener('click', exitImmersiveMode);
+
+    var swatches = document.querySelectorAll('.swatch');
+    for (var s = 0; s < swatches.length; s++) {
+      swatches[s].addEventListener('click', function() {
+        for (var k = 0; k < swatches.length; k++) {
+          swatches[k].classList.remove('active');
+        }
+        this.classList.add('active');
+        document.body.setAttribute('data-theme', this.getAttribute('data-set-theme'));
       });
+    }
+
+    // Tự động cuộn 1px khi xoay ngang màn hình trên iPhone để hỗ trợ ẩn thanh địa chỉ
+    window.addEventListener('orientationchange', function() {
+      setTimeout(function() {
+        window.scrollTo(0, 1);
+      }, 200);
     });
 
-    // Start animation loop
     requestAnimationFrame(updateClock);
   </script>
 </body>
