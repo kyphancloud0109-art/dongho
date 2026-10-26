@@ -11,7 +11,7 @@
     :root {
       --bg-primary: #070913;
       --bg-secondary: #0f172a;
-      --card-bg: rgba(15, 23, 42, 0.55);
+      --card-bg: rgba(15, 23, 42, 0.6);
       --card-border: rgba(255, 255, 255, 0.12);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -22,7 +22,7 @@
       --orb-2: rgba(168, 85, 247, 0.25);
       --orb-3: rgba(244, 63, 94, 0.2);
       --shadow-color: rgba(0, 0, 0, 0.55);
-      --dial-bg: rgba(9, 13, 26, 0.78);
+      --dial-bg: rgba(9, 13, 26, 0.82);
       --tick-color: rgba(255, 255, 255, 0.25);
       --tick-major: #f8fafc;
     }
@@ -30,7 +30,7 @@
     [data-theme="gold"] {
       --bg-primary: #0a0908;
       --bg-secondary: #171412;
-      --card-bg: rgba(24, 21, 18, 0.65);
+      --card-bg: rgba(24, 21, 18, 0.68);
       --card-border: rgba(212, 175, 55, 0.22);
       --text-main: #fef9ee;
       --text-muted: #bda882;
@@ -40,7 +40,7 @@
       --orb-1: rgba(245, 158, 11, 0.22);
       --orb-2: rgba(217, 119, 6, 0.18);
       --orb-3: rgba(239, 68, 68, 0.14);
-      --dial-bg: rgba(15, 13, 10, 0.85);
+      --dial-bg: rgba(15, 13, 10, 0.88);
       --tick-color: rgba(251, 191, 36, 0.28);
       --tick-major: #fde68a;
     }
@@ -48,7 +48,7 @@
     [data-theme="emerald"] {
       --bg-primary: #04100d;
       --bg-secondary: #06211a;
-      --card-bg: rgba(6, 33, 26, 0.58);
+      --card-bg: rgba(6, 33, 26, 0.62);
       --card-border: rgba(52, 211, 153, 0.18);
       --text-main: #ecfdf5;
       --text-muted: #6ee7b7;
@@ -58,7 +58,7 @@
       --orb-1: rgba(16, 185, 129, 0.25);
       --orb-2: rgba(6, 182, 212, 0.22);
       --orb-3: rgba(250, 204, 21, 0.15);
-      --dial-bg: rgba(4, 20, 16, 0.82);
+      --dial-bg: rgba(4, 20, 16, 0.85);
       --tick-color: rgba(110, 231, 183, 0.25);
       --tick-major: #d1fae5;
     }
@@ -66,7 +66,7 @@
     [data-theme="light"] {
       --bg-primary: #f1f5f9;
       --bg-secondary: #e2e8f0;
-      --card-bg: rgba(255, 255, 255, 0.75);
+      --card-bg: rgba(255, 255, 255, 0.78);
       --card-border: rgba(15, 23, 42, 0.08);
       --text-main: #0f172a;
       --text-muted: #64748b;
@@ -77,7 +77,7 @@
       --orb-2: rgba(124, 58, 237, 0.15);
       --orb-3: rgba(225, 29, 72, 0.14);
       --shadow-color: rgba(15, 23, 42, 0.12);
-      --dial-bg: rgba(255, 255, 255, 0.9);
+      --dial-bg: rgba(255, 255, 255, 0.92);
       --tick-color: rgba(15, 23, 42, 0.22);
       --tick-major: #0f172a;
     }
@@ -88,23 +88,26 @@
       padding: 0;
     }
 
-    html, body {
+    html {
       width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow-x: hidden;
+      height: 100%;
     }
 
     body {
+      width: 100%;
+      min-height: 100%;
+      min-height: 100dvh;
       font-family: 'Outfit', 'Inter', sans-serif;
       background: radial-gradient(circle at 50% 0%, var(--bg-secondary), var(--bg-primary) 75%);
       color: var(--text-main);
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: max(16px, env(safe-area-inset-top))
                max(16px, env(safe-area-inset-right))
                max(16px, env(safe-area-inset-bottom))
                max(16px, env(safe-area-inset-left));
+      overflow-x: hidden;
       position: relative;
       transition: background 0.5s ease, color 0.5s ease;
     }
@@ -158,12 +161,12 @@
       100% { transform: translate(40px, -35px) scale(1.12); }
     }
 
-    /* Main Glass Card — margin: auto centers both vertically & horizontally without clipping */
+    /* Main Glass Card */
     .clock-dashboard {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 1020px;
+      max-width: 1000px;
       margin: auto;
       background: var(--card-bg);
       backdrop-filter: blur(28px);
@@ -175,7 +178,7 @@
                   inset 0 1px 1px rgba(255, 255, 255, 0.15);
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 28px;
       transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
@@ -186,7 +189,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
-      padding-bottom: 18px;
+      padding-bottom: 16px;
       border-bottom: 1px solid var(--card-border);
     }
 
@@ -213,7 +216,7 @@
     }
 
     .greeting-text {
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 500;
       color: var(--text-muted);
       letter-spacing: 0.02em;
@@ -294,16 +297,16 @@
     /* Center Content Grid */
     .main-grid {
       display: grid;
-      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+      grid-template-columns: 310px minmax(0, 1fr);
       gap: 36px;
       align-items: center;
     }
 
-    /* Left: Pure SVG Analog Watch — never loses alignment at any scale */
+    /* Left: Pure SVG Analog Watch centered at (0,0) via viewBox="-170 -170 340 340" */
     .analog-wrapper {
       position: relative;
       width: 100%;
-      max-width: 320px;
+      max-width: 310px;
       aspect-ratio: 1 / 1;
       margin: 0 auto;
       display: flex;
@@ -324,13 +327,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .analog-svg {
       width: 100%;
       height: 100%;
       display: block;
-      overflow: visible;
     }
 
     .ring-bg {
@@ -339,12 +342,11 @@
       stroke-width: 4;
     }
 
+    /* Notice: NO CSS transform or transform-origin here! SVG attributes handle rotation around (0,0) */
     .ring-meter {
       fill: none;
       stroke-width: 4.5;
       stroke-linecap: round;
-      transform: rotate(-90deg);
-      transform-origin: 170px 170px;
       transition: stroke 0.4s ease;
     }
 
@@ -394,7 +396,6 @@
     }
 
     .svg-hand {
-      transform-origin: 170px 170px;
       stroke-linecap: round;
     }
 
@@ -507,7 +508,7 @@
 
     .time-digits {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(2rem, 4.5vw, 3.9rem);
+      font-size: clamp(2rem, 4.5vw, 3.8rem);
       font-weight: 700;
       line-height: 1.05;
       letter-spacing: -0.03em;
@@ -635,10 +636,10 @@
       }
       .main-grid {
         grid-template-columns: 1fr;
-        gap: 26px;
+        gap: 24px;
       }
       .analog-wrapper {
-        max-width: 260px;
+        max-width: 250px;
       }
       .date-banner {
         align-items: center;
@@ -661,49 +662,49 @@
         border-radius: 18px;
       }
       .analog-wrapper {
-        max-width: 230px;
+        max-width: 220px;
       }
     }
 
     /* =====================================================
-       MOBILE LANDSCAPE (Điện thoại xoay ngang)
-       Giữ bố cục 2 cột cân đối, gọn gàng vừa khít chiều cao
+       MOBILE & TABLET LANDSCAPE (Màn hình ngang có chiều cao thấp)
        ===================================================== */
-    @media (max-height: 540px) and (orientation: landscape) {
+    @media (max-height: 600px) and (orientation: landscape) {
       body {
         padding: max(8px, env(safe-area-inset-top))
-                 max(16px, env(safe-area-inset-right))
+                 max(14px, env(safe-area-inset-right))
                  max(8px, env(safe-area-inset-bottom))
-                 max(16px, env(safe-area-inset-left));
+                 max(14px, env(safe-area-inset-left));
       }
       .clock-dashboard {
-        padding: 16px 22px;
-        gap: 14px;
+        width: 100%;
+        max-width: 100%;
+        padding: 14px 20px;
+        gap: 12px;
         border-radius: 22px;
-        max-width: 960px;
       }
       .top-bar {
-        padding-bottom: 10px;
+        padding-bottom: 8px;
         gap: 8px;
       }
       .greeting-text {
-        font-size: 0.85rem;
+        font-size: 0.84rem;
       }
       .btn-control {
         padding: 5px 10px;
-        font-size: 0.75rem;
+        font-size: 0.74rem;
       }
       .swatch {
         width: 16px;
         height: 16px;
       }
       .main-grid {
-        grid-template-columns: 185px minmax(0, 1fr);
-        gap: 22px;
+        grid-template-columns: clamp(160px, 24vw, 210px) minmax(0, 1fr);
+        gap: 20px;
         align-items: center;
       }
       .analog-wrapper {
-        max-width: 185px;
+        max-width: 100%;
       }
       .digital-section {
         gap: 10px;
@@ -711,16 +712,16 @@
       .date-banner {
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
       }
       .weekday-badge {
-        padding: 3px 10px;
-        font-size: 0.75rem;
+        padding: 4px 11px;
+        font-size: 0.74rem;
       }
       .full-date-display {
-        font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+        font-size: clamp(1.1rem, 2.3vw, 1.45rem);
       }
       .time-cards {
         gap: 10px;
@@ -730,7 +731,7 @@
         border-radius: 16px;
       }
       .time-digits {
-        font-size: clamp(1.6rem, 3.8vw, 2.3rem);
+        font-size: clamp(1.65rem, 4vw, 2.45rem);
       }
       .unit-label {
         margin-top: 3px;
@@ -740,7 +741,7 @@
         gap: 8px;
       }
       .date-pill {
-        padding: 6px 6px;
+        padding: 7px 6px;
         border-radius: 12px;
         flex-direction: row;
         justify-content: center;
@@ -779,7 +780,7 @@
     <header class="top-bar">
       <div class="greeting-box">
         <span class="status-dot"></span>
-        <span class="greeting-text" id="greetingText">Giờ chuẩn hệ thống</span>
+        <span class="greeting-text" id="greetingText">Chào buổi tối • Giờ chuẩn hệ thống</span>
       </div>
 
       <div class="controls">
@@ -806,34 +807,34 @@
 
     <!-- Main Clock Grid -->
     <section class="main-grid">
-      <!-- Pure SVG Analog Clock — 100% Co-centric & Responsive -->
+      <!-- Pure SVG Analog Clock with origin at (0,0) via viewBox="-170 -170 340 340" -->
       <div class="analog-wrapper">
         <div class="analog-face">
-          <svg class="analog-svg" viewBox="0 0 340 340">
+          <svg class="analog-svg" viewBox="-170 -170 340 340">
             <!-- Outer Ring: Seconds -->
-            <circle class="ring-bg" cx="170" cy="170" r="160"></circle>
-            <circle class="ring-meter ring-sec" id="ringSec" cx="170" cy="170" r="160"></circle>
+            <circle class="ring-bg" cx="0" cy="0" r="160"></circle>
+            <circle class="ring-meter ring-sec" id="ringSec" cx="0" cy="0" r="160" transform="rotate(-90)"></circle>
             <!-- Middle Ring: Minutes -->
-            <circle class="ring-bg" cx="170" cy="170" r="150"></circle>
-            <circle class="ring-meter ring-min" id="ringMin" cx="170" cy="170" r="150"></circle>
+            <circle class="ring-bg" cx="0" cy="0" r="150"></circle>
+            <circle class="ring-meter ring-min" id="ringMin" cx="0" cy="0" r="150" transform="rotate(-90)"></circle>
             <!-- Inner Ring: Hours -->
-            <circle class="ring-bg" cx="170" cy="170" r="140"></circle>
-            <circle class="ring-meter ring-hour" id="ringHour" cx="170" cy="170" r="140"></circle>
+            <circle class="ring-bg" cx="0" cy="0" r="140"></circle>
+            <circle class="ring-meter ring-hour" id="ringHour" cx="0" cy="0" r="140" transform="rotate(-90)"></circle>
 
-            <!-- 60 Ticks generated via JS in SVG space -->
+            <!-- 60 Ticks generated via JS around (0,0) -->
             <g id="svgTicksGroup"></g>
 
             <!-- Brand Label -->
-            <text x="170" y="112" class="svg-brand-title">CHRONO</text>
-            <text x="170" y="124" class="svg-brand-sub">VIETNAM</text>
+            <text x="0" y="-56" class="svg-brand-title">CHRONO</text>
+            <text x="0" y="-44" class="svg-brand-sub">VIETNAM</text>
 
-            <!-- Clock Hands (centered at 170, 170) -->
-            <line id="handHour" class="svg-hand svg-hand-hour" x1="170" y1="170" x2="170" y2="98"></line>
-            <line id="handMin"  class="svg-hand svg-hand-min"  x1="170" y1="170" x2="170" y2="70"></line>
-            <line id="handSec"  class="svg-hand svg-hand-sec"  x1="170" y1="194" x2="170" y2="54"></line>
+            <!-- Clock Hands centered natively at (0,0) -->
+            <line id="handHour" class="svg-hand svg-hand-hour" x1="0" y1="0" x2="0" y2="-72"></line>
+            <line id="handMin"  class="svg-hand svg-hand-min"  x1="0" y1="0" x2="0" y2="-100"></line>
+            <line id="handSec"  class="svg-hand svg-hand-sec"  x1="0" y1="24" x2="0" y2="-116"></line>
 
             <!-- Center Cap -->
-            <circle cx="170" cy="170" r="7" class="svg-center-outer"></circle>
+            <circle cx="0" cy="0" r="7" class="svg-center-outer"></circle>
           </svg>
         </div>
       </div>
@@ -899,18 +900,18 @@
   </main>
 
   <script>
-    // Generate 60 SVG dial ticks around (170, 170) so scaling never shifts ticks
+    // Generate 60 SVG dial ticks around origin (0, 0)
     const svgTicksGroup = document.getElementById('svgTicksGroup');
     const SVG_NS = 'http://www.w3.org/2000/svg';
     for (let i = 0; i < 60; i++) {
       const line = document.createElementNS(SVG_NS, 'line');
       const isMajor = i % 5 === 0;
       line.setAttribute('class', isMajor ? 'svg-tick major' : 'svg-tick');
-      line.setAttribute('x1', '170');
-      line.setAttribute('y1', '40');
-      line.setAttribute('x2', '170');
-      line.setAttribute('y2', isMajor ? '53' : '47');
-      line.setAttribute('transform', `rotate(${i * 6} 170 170)`);
+      line.setAttribute('x1', '0');
+      line.setAttribute('y1', '-130');
+      line.setAttribute('x2', '0');
+      line.setAttribute('y2', isMajor ? '-117' : '-123');
+      line.setAttribute('transform', `rotate(${i * 6})`);
       svgTicksGroup.appendChild(line);
     }
 
@@ -1000,10 +1001,10 @@
       const exactMinutes = minutes + exactSeconds / 60;
       const exactHours   = (hours % 12) + exactMinutes / 60;
 
-      // Rotate Analog SVG Hands around exact center (170, 170)
-      handSec.setAttribute('transform', `rotate(${exactSeconds * 6} 170 170)`);
-      handMin.setAttribute('transform', `rotate(${exactMinutes * 6} 170 170)`);
-      handHour.setAttribute('transform', `rotate(${exactHours * 30} 170 170)`);
+      // Rotate Analog SVG Hands around origin (0, 0)
+      handSec.setAttribute('transform', `rotate(${exactSeconds * 6})`);
+      handMin.setAttribute('transform', `rotate(${exactMinutes * 6})`);
+      handHour.setAttribute('transform', `rotate(${exactHours * 30})`);
 
       // Update SVG Circular Progress Rings
       ringSec.style.strokeDashoffset  = CIRC_SEC * (1 - exactSeconds / 60);
